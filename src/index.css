@@ -1,0 +1,780 @@
+/* =========================================
+   POKÉMON EXPLORER
+   Complete Responsive Stylesheet
+   Desktop | Tablet | Mobile
+========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap');
+
+/* =========================================
+   1. GLOBAL
+========================================= */
+
+:root {
+  font-family: 'Nunito', sans-serif;
+  color: #252b3b;
+  background: #f5f7fc;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+
+  --primary: #ef5350;
+  --primary-dark: #d93636;
+  --text: #252b3b;
+  --muted: #9299a8;
+  --surface: #ffffff;
+  --border: #edf0f6;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  background: #f5f7fc;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* =========================================
+   2. APP LAYOUT
+========================================= */
+
+.app {
+  min-height: 100vh;
+}
+
+.app-header {
+  padding: 42px 24px 32px;
+  text-align: center;
+  background: #ffffff;
+  border-bottom: 1px solid var(--border);
+}
+
+.app-header h1 {
+  margin-bottom: 24px;
+  color: var(--text);
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 900;
+  letter-spacing: -1.5px;
+}
+
+.app-main {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 36px 24px 60px;
+}
+
+/* =========================================
+   3. SEARCH BAR
+========================================= */
+
+.search-wrapper {
+  position: relative;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.search-input {
+  width: 100%;
+  height: 54px;
+  padding: 0 52px 0 20px;
+  border: 2px solid #edf0f6;
+  border-radius: 14px;
+  outline: none;
+  background: #f8f9fc;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 600;
+  transition: 0.25s ease;
+}
+
+.search-input::placeholder {
+  color: #a7adba;
+}
+
+.search-input:focus {
+  border-color: var(--primary);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(239, 83, 80, 0.09);
+}
+
+.clear-btn {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: #939aaa;
+  font-size: 19px;
+  transition: 0.2s;
+}
+
+.clear-btn:hover {
+  color: var(--primary);
+}
+
+/* =========================================
+   4. POKEMON GRID
+========================================= */
+
+.pokemon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+  gap: 22px;
+}
+
+/* =========================================
+   5. POKEMON CARD
+========================================= */
+
+.pokemon-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 225px;
+  padding: 22px 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+  cursor: pointer;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.pokemon-card:hover {
+  transform: translateY(-6px);
+  border-color: #ffd1d0;
+  box-shadow: 0 12px 30px rgba(40, 50, 80, 0.09);
+}
+
+.pokemon-card img {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.pokemon-card:hover img {
+  transform: scale(1.1);
+}
+
+.pokemon-id {
+  margin-top: 8px;
+  color: #a1a7b4;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.pokemon-name {
+  margin-top: 4px;
+  color: var(--text);
+  font-size: 17px;
+  font-weight: 900;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+/* =========================================
+   6. LOADING STATE
+========================================= */
+
+.loading-state {
+  display: flex;
+  min-height: 350px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.spinner {
+  width: 42px;
+  height: 42px;
+  border: 4px solid #ffe1e0;
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================
+   7. EMPTY & ERROR STATES
+========================================= */
+
+.empty-state,
+.error-state {
+  padding: 70px 20px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: #ffffff;
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.error-state p {
+  margin-bottom: 20px;
+  color: #e05252;
+}
+
+.retry-btn {
+  padding: 11px 24px;
+  border: none;
+  border-radius: 10px;
+  background: var(--primary);
+  color: white;
+  font-weight: 800;
+  transition: 0.2s;
+}
+
+.retry-btn:hover {
+  transform: translateY(-2px);
+  background: var(--primary-dark);
+}
+
+/* =========================================
+   8. PREMIUM DETAIL MODAL
+========================================= */
+
+.detail-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+  background: rgba(18, 25, 42, 0.78);
+  backdrop-filter: blur(12px);
+  animation: fadeIn 0.25s ease;
+}
+
+.detail-card {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  max-height: 90vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 28px;
+  background: #ffffff;
+  text-align: center;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.3s ease;
+}
+
+/* Custom scrollbar */
+
+.detail-card::-webkit-scrollbar {
+  width: 5px;
+}
+
+.detail-card::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #dce1eb;
+}
+
+.detail-card::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Close button */
+
+.close-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 2;
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 1px solid #edf0f5;
+  border-radius: 50%;
+  background: #f7f8fb;
+  color: #596174;
+  font-size: 19px;
+  transition: 0.2s ease;
+}
+
+.close-btn:hover {
+  transform: rotate(90deg);
+  background: #ffe8e7;
+  color: var(--primary);
+}
+
+/* Pokemon artwork */
+
+.detail-img {
+  display: block;
+  width: 210px;
+  height: 210px;
+  margin: 0 auto 12px;
+  object-fit: contain;
+  filter: drop-shadow(0 15px 15px rgba(30, 40, 60, 0.12));
+  animation: pokemonFloat 3s ease-in-out infinite;
+}
+
+@keyframes pokemonFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+/* Pokemon title */
+
+.detail-card h2 {
+  margin-top: 5px;
+  color: #222b40;
+  font-size: 34px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  text-transform: capitalize;
+}
+
+.detail-id {
+  margin-top: 5px;
+  color: #a0a7b5;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+/* =========================================
+   9. TYPE BADGES
+========================================= */
+
+.type-badges {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0 28px;
+}
+
+.type-badge {
+  min-width: 85px;
+  padding: 9px 18px;
+  border-radius: 30px;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  text-transform: capitalize;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* =========================================
+   10. BASE STATS
+========================================= */
+
+.stats-section {
+  padding: 24px;
+  border: 1px solid #edf0f5;
+  border-radius: 20px;
+  background: #f8f9fc;
+  text-align: left;
+}
+
+.stats-section h4 {
+  margin-bottom: 24px;
+  color: #283149;
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.stat-row {
+  display: grid;
+  grid-template-columns: 115px minmax(0, 1fr) 35px;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 19px;
+}
+
+.stat-row:last-child {
+  margin-bottom: 0;
+}
+
+.stat-name {
+  color: #778196;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: capitalize;
+}
+
+.stat-bar-wrapper {
+  height: 9px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #e5e9f1;
+}
+
+.stat-bar {
+  height: 100%;
+  border-radius: 20px;
+  background: linear-gradient(90deg, #ff9992, #ef5350);
+  transition: width 0.7s ease;
+}
+
+.stat-value {
+  color: #283149;
+  font-size: 13px;
+  font-weight: 900;
+  text-align: right;
+}
+
+/* =========================================
+   11. EXTRA INFORMATION
+========================================= */
+
+.detail-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.detail-meta p {
+  padding: 15px 10px;
+  border: 1px solid #edf0f5;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #667085;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+/* =========================================
+   12. ANIMATIONS
+========================================= */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   13. TABLET RESPONSIVE
+========================================= */
+
+@media (max-width: 900px) {
+  .app-main {
+    padding: 30px 20px 50px;
+  }
+
+  .pokemon-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 17px;
+  }
+
+  .pokemon-card {
+    min-height: 205px;
+  }
+}
+
+/* =========================================
+   14. MOBILE RESPONSIVE
+========================================= */
+
+@media (max-width: 600px) {
+  .app-header {
+    padding: 28px 16px 24px;
+  }
+
+  .app-header h1 {
+    margin-bottom: 20px;
+    font-size: 29px;
+    letter-spacing: -1px;
+  }
+
+  .app-main {
+    padding: 22px 14px 40px;
+  }
+
+  .search-wrapper {
+    max-width: 100%;
+  }
+
+  .search-input {
+    height: 49px;
+    font-size: 14px;
+  }
+
+  /* Two-column Pokemon grid */
+
+  .pokemon-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .pokemon-card {
+    min-height: 175px;
+    padding: 12px 8px;
+    border-radius: 16px;
+  }
+
+  .pokemon-card img {
+    width: 110px;
+    height: 110px;
+  }
+
+  .pokemon-name {
+    font-size: 14px;
+    overflow-wrap: anywhere;
+  }
+
+  .pokemon-id {
+    font-size: 11px;
+  }
+
+  /* Detail popup */
+
+  .detail-overlay {
+    align-items: center;
+    padding: 12px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .detail-card {
+    width: 100%;
+    max-width: 430px;
+    max-height: calc(100dvh - 24px);
+    padding: 24px 16px;
+    border-radius: 22px;
+  }
+
+  .detail-img {
+    width: 155px;
+    height: 155px;
+    margin-bottom: 8px;
+  }
+
+  .detail-card h2 {
+    font-size: 27px;
+  }
+
+  .detail-id {
+    font-size: 12px;
+  }
+
+  .close-btn {
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+  }
+
+  /* Type badges */
+
+  .type-badges {
+    gap: 8px;
+    margin: 16px 0 22px;
+  }
+
+  .type-badge {
+    padding: 7px 14px;
+    font-size: 11px;
+  }
+
+  /* Stats */
+
+  .stats-section {
+    padding: 17px 12px;
+    border-radius: 15px;
+  }
+
+  .stats-section h4 {
+    margin-bottom: 18px;
+    font-size: 15px;
+  }
+
+  .stat-row {
+    grid-template-columns: 88px minmax(0, 1fr) 28px;
+    gap: 7px;
+    margin-bottom: 16px;
+  }
+
+  .stat-name,
+  .stat-value {
+    font-size: 11px;
+  }
+
+  .stat-bar-wrapper {
+    height: 7px;
+  }
+
+  /* Weight and height */
+
+  .detail-meta {
+    gap: 9px;
+    margin-top: 15px;
+  }
+
+  .detail-meta p {
+    padding: 12px 6px;
+    font-size: 11px;
+    overflow-wrap: anywhere;
+  }
+
+  /* Empty and error */
+
+  .empty-state,
+  .error-state {
+    padding: 45px 15px;
+    font-size: 14px;
+  }
+}
+
+/* =========================================
+   15. EXTRA SMALL PHONES
+========================================= */
+
+@media (max-width: 360px) {
+  .app-header h1 {
+    font-size: 25px;
+  }
+
+  .app-main {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .pokemon-grid {
+    gap: 9px;
+  }
+
+  .pokemon-card {
+    min-height: 155px;
+    padding: 10px 5px;
+  }
+
+  .pokemon-card img {
+    width: 95px;
+    height: 95px;
+  }
+
+  .pokemon-name {
+    font-size: 13px;
+  }
+
+  .detail-card {
+    padding: 22px 12px;
+  }
+
+  .stat-row {
+    grid-template-columns: 78px minmax(0, 1fr) 26px;
+    gap: 5px;
+  }
+}
+
+/* =========================================
+   16. LANDSCAPE PHONES
+========================================= */
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .detail-overlay {
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .detail-card {
+    max-height: none;
+    margin: auto;
+  }
+
+  .detail-img {
+    width: 115px;
+    height: 115px;
+  }
+
+  .detail-card h2 {
+    font-size: 24px;
+  }
+}
+
+/* =========================================
+   17. TOUCH DEVICES
+========================================= */
+
+@media (hover: none) {
+  .pokemon-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .pokemon-card:active {
+    transform: scale(0.97);
+  }
+}
+
+/* =========================================
+   18. ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
