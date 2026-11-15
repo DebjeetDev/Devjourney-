@@ -1,11 +1,15 @@
+import Section from "./Section";
 
-import {topicName} from "./topic"
-function App() {
+export default function App() {
+ 
   return (
     <>
-      <h1>{topicName}</h1>
+    <Section title="Raect">
+      <p>this is good boit bad as well </p>
+    </Section>
+    <Section title="next js">
+     <p>we not start it yet</p>
+    </Section>
     </>
   )
 }
-
-export default App
